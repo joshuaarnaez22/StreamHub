@@ -11,7 +11,7 @@ export const Logo = () => {
   return (
     <div className="flex flex-col items-center gay-4">
       <div className="bg-white p-4 rounded-full">
-        <Image src="/logo.svg" height={80} width={80} alt="stream-hub-logo" />
+        <Image src="/logo.webp" height={80} width={80} alt="stream-hub-logo" />
       </div>
       <div className={cn("flex flex-col items-center", font.className)}>
         <p className="text-xl font-semibold">Stream-Hub</p>

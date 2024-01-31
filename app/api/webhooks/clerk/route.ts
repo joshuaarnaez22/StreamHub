@@ -50,11 +50,10 @@ export async function POST(req: Request) {
   }
 
   // Get the ID and type
-  const { id } = evt.data;
+  // const { id } = evt.data;
   const eventType = evt.type;
 
-  const { data } = JSON.parse(body);
-  if (id && eventType === "user.created") {
+  if (eventType === "user.created") {
     await prisma.user.create({
       data: {
         externalUserId: payload.data.id,
@@ -63,8 +62,26 @@ export async function POST(req: Request) {
       },
     });
   }
+  if (eventType === "user.updated") {
+    await prisma.user.update({
+      where: {
+        externalUserId: payload.data.id,
+      },
+      data: {
+        username: payload.data.username,
+        imageUrl: payload.data.image_url,
+      },
+    });
+  }
+  if (eventType === "user.deleted") {
+    await prisma.user.delete({
+      where: {
+        externalUserId: payload.data.id,
+      },
+    });
+  }
   // console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
-  console.log("Webhook body:", body);
+  // console.log("Webhook body:", body);
 
   return new Response("", { status: 200 });
 }
