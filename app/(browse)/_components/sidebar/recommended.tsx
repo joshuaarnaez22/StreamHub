@@ -2,7 +2,7 @@
 import React from "react";
 import { useSidebarStore } from "@/store/use-sidebar";
 import { User } from "@prisma/client";
-import { RecommendedItem, RecommendedItemSkeleton } from "./recommended-item";
+import { RecommendedItem } from "./recommended-item";
 
 interface RecommendedProps {
   data: User[];
@@ -30,16 +30,6 @@ export const Recommended = ({ data }: RecommendedProps) => {
           />
         ))}
       </div>
-    </div>
-  );
-};
-
-export const RecommendedSkeleton = () => {
-  return (
-    <div className="">
-      {[...Array(4)].map((_, i) => (
-        <RecommendedItemSkeleton key={i} />
-      ))}
     </div>
   );
 };

@@ -12,7 +12,7 @@ const Toogle = () => {
   return (
     <>
       {collapsed && (
-        <div className="hidden lg:flex  p-3 mb-2 items-center justify-between">
+        <div className="hidden lg:flex p-3 mb-2 items-center justify-between">
           <Hint label={label} asChild>
             <Button onClick={onExpand} className="p-2" variant="ghost">
               <ArrowRightFromLine className="w-5 h-5" />

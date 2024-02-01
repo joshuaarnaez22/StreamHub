@@ -1,7 +1,7 @@
 import React from "react";
 import { Wrapper } from "./wrapper";
 import Toogle from "./toogle";
-import { Recommended, RecommendedSkeleton } from "./recommended";
+import { Recommended } from "./recommended";
 import { getRecommended } from "@/actions/server-actions/recommended";
 
 const Sidebar = async () => {
@@ -17,11 +17,3 @@ const Sidebar = async () => {
 };
 
 export default Sidebar;
-
-export const SidebarSkeleton = () => {
-  return (
-    <aside className="fixed left-0 flex-col w-[70px] lg:w-60 h-full border-r-2 bg-gray-700 z-50">
-      <RecommendedSkeleton />
-    </aside>
-  );
-};

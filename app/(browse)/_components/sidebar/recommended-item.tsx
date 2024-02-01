@@ -57,14 +57,3 @@ export const RecommendedItem = ({
     </Button>
   );
 };
-
-export const RecommendedItemSkeleton = () => {
-  return (
-    <div className="flex items-center gap-x-4 px-4 py-2 ">
-      <Skeleton className=" min-w-8 min-h-8 rounded-full" />
-      <div className="flex-1">
-        <Skeleton className="h-6 " />
-      </div>
-    </div>
-  );
-};
