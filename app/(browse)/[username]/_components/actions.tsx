@@ -12,6 +12,7 @@ interface ActionsProps {
 export const Actions = ({ id, isFollowing }: ActionsProps) => {
   const [isPending, setIsPending] = useState(false);
   const router = useRouter();
+  const [following, setFollowing] = useState(isFollowing);
   const handleFollow = async () => {
     try {
       setIsPending(true);
@@ -19,6 +20,7 @@ export const Actions = ({ id, isFollowing }: ActionsProps) => {
       toast.success(data.message, {
         icon: "👍",
       });
+      setFollowing(!following);
       router.refresh();
     } catch (error) {
       console.log(error);
@@ -36,6 +38,7 @@ export const Actions = ({ id, isFollowing }: ActionsProps) => {
       toast.success(data.message, {
         icon: "👍",
       });
+      setFollowing(!following);
       router.refresh();
     } catch (error) {
       console.log(error);
@@ -52,7 +55,7 @@ export const Actions = ({ id, isFollowing }: ActionsProps) => {
       onClick={() => (isFollowing ? handleUnFollow() : handleFollow())}
       disabled={isPending}
     >
-      {isFollowing ? "Unfollow" : "Follow"}
+      {following ? "Unfollow" : "Follow"}
     </Button>
   );
 };
