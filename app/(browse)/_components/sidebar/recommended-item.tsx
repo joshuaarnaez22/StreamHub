@@ -26,18 +26,21 @@ export const RecommendedItem = ({
   const isActive = pathname === href;
 
   return (
-    <Button
-      variant="ghost"
-      asChild
-      className={cn(collapsed ? "justify-center" : "justify-start")}
-    >
-      <div
+    <Link href={href}>
+      <Button
+        variant="ghost"
+        asChild
         className={cn(
-          "w-full h-12 p-2 items-center justify-start",
-          isActive && "bg-accent"
+          "hover:bg-slate-600 mb-2",
+          collapsed ? "justify-center" : "justify-start"
         )}
       >
-        <Link href={href}>
+        <div
+          className={cn(
+            "w-full h-12 p-2 items-center justify-start",
+            isActive && "bg-slate-500"
+          )}
+        >
           <div
             className={cn(
               "flex items-center gap-x-4 ",
@@ -52,8 +55,8 @@ export const RecommendedItem = ({
             {!collapsed && <div className=" truncate">{username}</div>}
             {!collapsed && isLive && <LiveBadge />}
           </div>
-        </Link>
-      </div>
-    </Button>
+        </div>
+      </Button>
+    </Link>
   );
 };

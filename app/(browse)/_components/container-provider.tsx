@@ -17,6 +17,8 @@ export const ContainerProvider = ({ children }: ContainerProviderProps) => {
   }, [matches, onCollapse, onExpand]);
 
   return (
-    <div className={cn(collapsed ? "ml-20" : "ml-20 lg:ml-60")}>{children}</div>
+    <div className={cn("flex-1", collapsed ? "ml-20" : "ml-20 lg:ml-60")}>
+      {children}
+    </div>
   );
 };

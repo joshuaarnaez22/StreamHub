@@ -2,7 +2,7 @@ import React from "react";
 import { Wrapper } from "./wrapper";
 import Toogle from "./toogle";
 import { Recommended } from "./recommended";
-import { getRecommended } from "@/actions/server-actions/recommended";
+import { getRecommended } from "@/actions/recommended-service";
 
 const Sidebar = async () => {
   const users = await getRecommended();
