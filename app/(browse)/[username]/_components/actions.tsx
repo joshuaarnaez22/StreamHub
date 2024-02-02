@@ -52,7 +52,7 @@ export const Actions = ({ id, isFollowing }: ActionsProps) => {
   return (
     <Button
       variant="primary"
-      onClick={() => (isFollowing ? handleUnFollow() : handleFollow())}
+      onClick={() => (following ? handleUnFollow() : handleFollow())}
       disabled={isPending}
     >
       {following ? "Unfollow" : "Follow"}
