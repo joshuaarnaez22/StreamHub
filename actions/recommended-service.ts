@@ -1,23 +1,15 @@
 import prisma from "@/lib/prisma";
-import { getSelf } from "@/actions/auth-service";
-import { User } from "@prisma/client";
+import { auth } from "@clerk/nextjs";
 
 export const getRecommended = async () => {
-  let userId;
-  try {
-    const self = await getSelf();
-
-    userId = self.id;
-  } catch (error) {
-    userId = null;
-  }
+  const { userId } = await auth();
 
   let users = [];
   if (userId) {
     users = await prisma.user.findMany({
       where: {
         NOT: {
-          id: userId,
+          externalUserId: userId,
         },
       },
     });

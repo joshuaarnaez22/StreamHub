@@ -16,7 +16,7 @@ export default async function UserPage({ params }: UserPageProps) {
     return notFound();
   }
 
-  const isFollowing = (await isFollowingUser(user.id)) as boolean;
+  const isFollowing = await isFollowingUser(user.id);
 
   return (
     <div className="flex flex-col gap-y-4">

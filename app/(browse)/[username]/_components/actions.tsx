@@ -2,7 +2,7 @@
 import React, { useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
-import { onFollow, onUnfollowUser } from "@/actions/server-actions/follow";
+import { onFollow, onUnFollow } from "@/actions/server-actions/follow";
 
 interface ActionsProps {
   id: string;
@@ -14,14 +14,25 @@ export const Actions = ({ id, isFollowing }: ActionsProps) => {
   const handleFollow = () => {
     startTransition(() => {
       onFollow(id)
-        .then((response) => {
-          console.log(response);
-          toast.success(`You are now following ${response.username}`, {
-            icon: "👍",
-          });
+        .then(({ error, follow }) => {
+          if (follow) {
+            toast.success(
+              `You are now following ${follow.following.username}`,
+              {
+                icon: "👍",
+              }
+            );
+          }
+          if (error) {
+            toast.error(error, {
+              icon: "❌",
+            });
+          }
         })
-        .catch((error) => {
-          toast("Failed to follow", {
+        .catch((e: any) => {
+          console.log(e);
+
+          toast("Something went wrong", {
             icon: "❌",
           });
         });
@@ -30,15 +41,23 @@ export const Actions = ({ id, isFollowing }: ActionsProps) => {
 
   const handleUnFollow = () => {
     startTransition(() => {
-      onUnfollowUser(id)
-        .then((response) => {
-          toast.success(`You are now unfollowing ${response.username}`, {
-            icon: "👍",
-          });
+      onUnFollow(id)
+        .then(({ error, follow }) => {
+          if (follow) {
+            toast.success(`You have unfollow ${follow.following.username}`, {
+              icon: "👍",
+            });
+          }
+          if (error) {
+            toast.error(error, {
+              icon: "❌",
+            });
+          }
         })
-        .catch((error) => {
-          console.log(error);
-          toast("Failed to unfollow", {
+        .catch((e: any) => {
+          console.log(e);
+
+          toast("Something went wrong", {
             icon: "❌",
           });
         });

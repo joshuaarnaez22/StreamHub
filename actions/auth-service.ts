@@ -6,7 +6,7 @@ export const getSelf = async () => {
     const self = await currentUser();
 
     if (!self || !self.username) {
-      throw Error("Unauthorized");
+      return { error: "Unauthorized", user: null };
     }
 
     const user = await prisma.user.findUnique({
@@ -15,10 +15,16 @@ export const getSelf = async () => {
       },
     });
 
-    if (!user) throw Error("Not found");
+    if (!user) {
+      return { error: "Not found", user: null };
+    }
 
-    return user;
+    return {
+      error: null,
+      user,
+    };
   } catch (error: any) {
-    throw Error(error.message);
+    console.error(error); // Log errors for debugging
+    return { error: "Something went wrong", user: null };
   }
 };
