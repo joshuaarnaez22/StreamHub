@@ -8,53 +8,58 @@ export async function POST(req: NextRequest) {
     const { id } = await req.json();
 
     if (!self.user) {
-      return new NextResponse("Not login", { status: 401 });
+      return new NextResponse(null, { status: 404 });
     }
 
-    const otherUser = await prisma.user.findUnique({
-      where: {
-        id,
-      },
-    });
-    if (!otherUser) {
-      return new NextResponse("Not found", { status: 404 });
-    }
-
-    if (self.user.id === otherUser.id) {
+    if (id === self.user.id) {
       return NextResponse.json(
-        { follow: null, message: `Cannot unfollow yourself` },
+        { message: "Cannot unfollow yourself" },
         { status: 200 }
       );
     }
-    const existingFollow = await prisma.follow.findFirst({
+
+    const userAndFollow = await prisma.user.findUnique({
       where: {
-        followerId: self.user.id,
-        followingId: otherUser.id,
+        id,
+      },
+      select: {
+        id: true,
+        username: true,
+        followers: {
+          where: {
+            followerId: self.user.id,
+          },
+        },
       },
     });
+    if (!userAndFollow) {
+      return new NextResponse(null, { status: 404 });
+    }
 
-    if (!existingFollow) {
+    if (!userAndFollow?.followers.length) {
       return NextResponse.json(
-        { follow: null, message: `Not following` },
+        { follow: null, message: `Your are not following this user` },
         { status: 200 }
       );
     }
 
     const follow = await prisma.follow.delete({
       where: {
-        id: existingFollow.id,
+        id: userAndFollow.followers[0].id,
       },
       include: {
         following: true,
       },
     });
     return NextResponse.json(
-      { follow, message: `You unfollow ${follow.following.username}` },
-      { status: 200 }
+      {
+        follow,
+        message: `You are now unfollowing ${follow.following.username}`,
+      },
+      { status: 201 }
     );
   } catch (error) {
-    console.log("[UNFOLLOW_ERROR]", error);
-
+    console.log("[FOLLOW_ERROR]", error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }

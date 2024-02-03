@@ -8,42 +8,46 @@ export async function POST(req: NextRequest) {
     const { id } = await req.json();
 
     if (!self.user) {
-      return new NextResponse("Not login", { status: 401 });
+      return new NextResponse(null, { status: 404 });
     }
 
-    const otherUser = await prisma.user.findUnique({
-      where: {
-        id,
-      },
-    });
-    if (!otherUser) {
-      return new NextResponse("Not found", { status: 404 });
-    }
-
-    if (self.user.id === otherUser.id) {
+    if (id === self.user.id) {
       return NextResponse.json(
-        { follow: null, message: `Cannot follow yourself` },
+        { message: "Cannot unfollow yourself" },
         { status: 200 }
       );
     }
 
-    const existingFollow = await prisma.follow.findFirst({
+    const userAndFollow = await prisma.user.findUnique({
       where: {
-        followerId: self.user.id,
-        followingId: otherUser.id,
+        id,
+      },
+      select: {
+        id: true,
+        username: true,
+        followers: {
+          where: {
+            followerId: self.user.id,
+          },
+        },
       },
     });
 
-    if (existingFollow) {
+    if (!userAndFollow) {
+      return new NextResponse(null, { status: 404 });
+    }
+
+    if (userAndFollow?.followers.length) {
       return NextResponse.json(
         { follow: null, message: `Already following` },
         { status: 200 }
       );
     }
+
     const follow = await prisma.follow.create({
       data: {
         followerId: self.user.id,
-        followingId: otherUser.id,
+        followingId: id,
       },
       include: {
         following: true,

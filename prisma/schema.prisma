@@ -21,16 +21,17 @@ model User {
   updatedAt      DateTime @updatedAt
 
   followers Follow[] @relation("FollowedBy")
+
   following Follow[] @relation("Following")
 }
 
 model Follow {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
-  followerId  String @db.ObjectId
-  followingId String @db.ObjectId
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  followerId String @db.ObjectId
+  follower   User   @relation(name: "FollowedBy", fields: [followerId], references: [id], onDelete: Cascade)
 
-  follower  User @relation(name: "Following", fields: [followerId], references: [id], onDelete: Cascade)
-  following User @relation(name: "FollowedBy", fields: [followingId], references: [id], onDelete: Cascade)
+  followingId String @db.ObjectId
+  following   User   @relation(name: "Following", fields: [followingId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
