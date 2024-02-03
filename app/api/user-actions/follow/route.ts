@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
       select: {
         id: true,
         username: true,
-        followUsers: {
+        followings: {
           where: {
             followerId: self.user.id,
           },
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
       return new NextResponse(null, { status: 404 });
     }
 
-    if (userAndFollow?.followUsers.length) {
+    if (userAndFollow?.followings.length) {
       return NextResponse.json(
         { follow: null, message: `Already following` },
         { status: 200 }
