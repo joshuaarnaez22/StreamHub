@@ -19,8 +19,8 @@ model User {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  followers Follow[] @relation("Follows") // Users who follow this user
-  following Follow[] @relation("FollowedBy") // Users this user follows
+  followedUsers  Follow[] @relation("Follows") // Users who follow this user
+  followingUsers Follow[] @relation("FollowedBy") // Users this user follows
 }
 
 model Follow {
