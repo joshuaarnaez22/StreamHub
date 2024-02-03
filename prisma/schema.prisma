@@ -19,17 +19,17 @@ model User {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  followedUsers  Follow[] @relation("Follows") // Users who follow this user
-  followingUsers Follow[] @relation("FollowedBy") // Users this user follows
+  followUsers    Follow[] @relation("Followers") // Users who this user follows
+  followingUsers Follow[] @relation("Following") // Users whos following this user
 }
 
 model Follow {
   id         String @id @default(auto()) @map("_id") @db.ObjectId
   followerId String @db.ObjectId
-  follower   User   @relation(name: "Follows", fields: [followerId], references: [id], onDelete: Cascade)
+  follower   User   @relation(name: "Followers", fields: [followerId], references: [id], onDelete: Cascade)
 
   followingId String @db.ObjectId
-  following   User   @relation(name: "FollowedBy", fields: [followingId], references: [id], onDelete: Cascade)
+  following   User   @relation(name: "Following", fields: [followingId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

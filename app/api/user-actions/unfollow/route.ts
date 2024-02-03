@@ -25,7 +25,8 @@ export async function POST(req: NextRequest) {
       select: {
         id: true,
         username: true,
-        followedUsers: {
+
+        followingUsers: {
           where: {
             followerId: self.user.id,
           },
@@ -36,7 +37,7 @@ export async function POST(req: NextRequest) {
       return new NextResponse(null, { status: 404 });
     }
 
-    if (!userAndFollow?.followedUsers.length) {
+    if (!userAndFollow?.followingUsers.length) {
       return NextResponse.json(
         { follow: null, message: `Your are not following this user` },
         { status: 200 }
@@ -45,7 +46,7 @@ export async function POST(req: NextRequest) {
 
     const follow = await prisma.follow.delete({
       where: {
-        id: userAndFollow.followedUsers[0].id,
+        id: userAndFollow.followingUsers[0].id,
       },
       include: {
         following: true,
