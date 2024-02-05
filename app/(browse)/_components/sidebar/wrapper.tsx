@@ -3,6 +3,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { useSidebarStore } from "@/store/use-sidebar";
 import {
+  FollowingSkeleton,
   MobileSidebarSkeleton,
   RecommendedSkeleton,
 } from "@/components/shared/skeletons/sidebar-skeleton";
@@ -19,6 +20,7 @@ export const Wrapper = ({ children }: WrapperProps) => {
     return (
       <aside className="fixed left-0 flex-col w-[70px] lg:w-60 h-full border-r-2 bg-gray-700 z-50">
         <MobileSidebarSkeleton />
+        <FollowingSkeleton />
         <RecommendedSkeleton />
       </aside>
     );

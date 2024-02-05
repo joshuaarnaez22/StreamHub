@@ -38,7 +38,7 @@ const avatarSizes = cva("", {
 });
 
 interface UserAvatarProps extends VariantProps<typeof avatarSizes> {
-  isLive: boolean;
+  isLive?: boolean;
   imageUrl: string;
   username: string;
   showBadge?: boolean;
@@ -57,7 +57,7 @@ export const UserAvatar = ({
     <div className="relative">
       <Avatar
         className={cn(
-          isLive && "ring-2 ring-green-600 border border-background",
+          isLive && "ring-2 ring-green-600 ",
           avatarSizes({ size })
         )}
       >

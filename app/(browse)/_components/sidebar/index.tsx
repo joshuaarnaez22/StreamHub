@@ -3,13 +3,20 @@ import { Wrapper } from "./wrapper";
 import Toogle from "./toogle";
 import { Recommended } from "./recommended";
 import { getRecommended } from "@/actions/recommended-service";
+import { getAllFollowUsers } from "@/actions/follow-service";
+import { Following } from "./following";
 
 const Sidebar = async () => {
-  const users = await getRecommended();
+  const [users, followedUser] = await Promise.all([
+    getRecommended(),
+    getAllFollowUsers(),
+  ]);
+
   return (
     <Wrapper>
       <Toogle />
       <div className="space-y-4 pt-4 lg:pt-0">
+        <Following data={followedUser} />
         <Recommended data={users} />
       </div>
     </Wrapper>

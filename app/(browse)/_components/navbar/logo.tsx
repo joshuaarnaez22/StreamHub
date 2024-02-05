@@ -18,6 +18,7 @@ export const Logo = () => {
             height={40}
             width={40}
             alt="stream-hub-logo"
+            className="bg-white"
           />
         </div>
         <div className={cn("hidden flex-col  lg:block", font.className)}>

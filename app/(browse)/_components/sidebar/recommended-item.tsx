@@ -12,7 +12,7 @@ import { LiveBadge } from "@/components/shared/live-badge";
 
 interface RecommendedItemProps {
   username: string;
-  isLive: boolean;
+  isLive?: boolean;
   imageUrl: string;
 }
 export const RecommendedItem = ({

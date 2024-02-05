@@ -47,13 +47,36 @@ export const Actions = ({ id, isFollowing }: ActionsProps) => {
       setIsPending(false);
     }
   };
+
+  const handleBlock = async () => {
+    const { data } = await axios.post("/api/user-actions/block", { id });
+    console.log(data);
+
+    toast.success(data.message, {
+      icon: "👍",
+    });
+    router.refresh();
+  };
+  const handleUnBlock = async () => {
+    const { data } = await axios.post("/api/user-actions/unblock", { id });
+    console.log(data);
+
+    toast.success(data.message, {
+      icon: "👍",
+    });
+    router.refresh();
+  };
   return (
-    <Button
-      variant="primary"
-      onClick={() => (isFollowing ? handleUnFollow() : handleFollow())}
-      disabled={isPending}
-    >
-      {isFollowing ? "Unfollow" : "Follow"}
-    </Button>
+    <>
+      {" "}
+      <Button
+        variant="primary"
+        onClick={() => (isFollowing ? handleUnFollow() : handleFollow())}
+        disabled={isPending}
+      >
+        {isFollowing ? "Unfollow" : "Follow"}
+      </Button>
+      <Button onClick={handleUnBlock}>unBlock</Button>
+    </>
   );
 };

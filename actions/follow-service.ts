@@ -31,3 +31,29 @@ export const isFollowingUser = async (id: string) => {
     return false;
   }
 };
+
+export const getAllFollowUsers = async () => {
+  const self = await getSelf();
+
+  if (!self.user) {
+    return [];
+  }
+
+  const folowedUsers = await prisma.follow.findMany({
+    where: {
+      followerId: self.user.id,
+      following: {
+        blockedBy: {
+          none: {
+            blockerId: self.user.id,
+          },
+        },
+      },
+    },
+    include: {
+      following: true,
+    },
+  });
+
+  return folowedUsers;
+};

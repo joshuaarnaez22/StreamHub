@@ -28,3 +28,34 @@ export const getSelf = async () => {
     return { error: "Something went wrong", user: null };
   }
 };
+
+export const getSelfByUsername = async (username: string) => {
+  try {
+    const self = await currentUser();
+
+    if (!self || !self.username) {
+      return { error: "Unauthorized", user: null };
+    }
+
+    const user = await prisma.user.findUnique({
+      where: {
+        username,
+      },
+    });
+
+    if (!user) {
+      return { error: "Not found", user: null };
+    }
+
+    if (username !== user.username) {
+      return { error: "Unauthorized", user: null };
+    }
+    return {
+      error: null,
+      user,
+    };
+  } catch (error: any) {
+    console.error(error); // Log errors for debugging
+    return { error: "Something went wrong", user: null };
+  }
+};

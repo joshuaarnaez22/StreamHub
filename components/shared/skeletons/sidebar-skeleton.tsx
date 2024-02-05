@@ -38,3 +38,13 @@ export const MobileSidebarSkeleton = () => {
     </div>
   );
 };
+
+export const FollowingSkeleton = () => {
+  return (
+    <div className="mb-6">
+      {[...Array(3)].map((_, i) => (
+        <RecommendedItemSkeleton key={i} />
+      ))}
+    </div>
+  );
+};
