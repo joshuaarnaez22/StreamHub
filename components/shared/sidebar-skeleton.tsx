@@ -48,3 +48,30 @@ export const FollowingSkeleton = () => {
     </div>
   );
 };
+
+export const DashboardSkeleton = () => {
+  return (
+    <div className="flex flex-col  justify-center">
+      {[...Array(4)].map((_, i) => (
+        <div className="flex justify-center items-center gap-x-4 p-2" key={i}>
+          <Skeleton className="min-h-10 w-12 rounded-md" />
+          <div className="flex-1 hidden lg:block">
+            <Skeleton className="h-10" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export const ChatSkeleton = () => {
+  return (
+    <div className="flex flex-col space-y-6 justify-center m-6">
+      <Skeleton className="h-12 w-40 rounded-md" />
+
+      {[...Array(3)].map((_, i) => (
+        <Skeleton className="h-16 w-full rounded-md" key={i} />
+      ))}
+    </div>
+  );
+};

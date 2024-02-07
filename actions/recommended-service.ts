@@ -1,5 +1,4 @@
 import prisma from "@/lib/prisma";
-import { auth } from "@clerk/nextjs";
 import { getSelf } from "./auth-service";
 
 export const getRecommended = async () => {

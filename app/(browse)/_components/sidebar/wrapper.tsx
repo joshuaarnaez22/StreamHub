@@ -6,7 +6,7 @@ import {
   FollowingSkeleton,
   MobileSidebarSkeleton,
   RecommendedSkeleton,
-} from "@/components/shared/skeletons/sidebar-skeleton";
+} from "@/components/shared/sidebar-skeleton";
 import { useIsClient } from "usehooks-ts";
 interface WrapperProps {
   children: React.ReactNode;
