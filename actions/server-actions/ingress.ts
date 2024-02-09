@@ -25,13 +25,16 @@ const ingressClient = new IngressClient(process.env.LIVEKIT_API_URL!);
 export const createIngress = async (ingressType: IngressInput) => {
   const self = await getSelf();
 
+  if (!self.user) {
+    throw new Error("Not found");
+  }
   await resetIngresses(self.user?.id!);
 
   const options: CreateIngressOptions = {
-    name: self.user?.username,
-    roomName: self.user?.id,
-    participantName: self.user?.username,
-    participantIdentity: self.user?.id,
+    name: self.user.username,
+    roomName: self.user.id,
+    participantName: self.user.username,
+    participantIdentity: self.user.id,
   };
 
   if (ingressType === IngressInput.WHIP_INPUT) {
@@ -55,7 +58,7 @@ export const createIngress = async (ingressType: IngressInput) => {
 
   await prisma.stream.update({
     where: {
-      userId: self.user?.id,
+      userId: self.user.id,
     },
     data: {
       ingressId: ingress.ingressId,

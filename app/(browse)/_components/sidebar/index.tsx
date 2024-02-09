@@ -7,7 +7,7 @@ import { getAllFollowUsers } from "@/actions/follow-service";
 import { Following } from "./following";
 
 const Sidebar = async () => {
-  const [users, followedUser] = await Promise.all([
+  const [users, followedUsers] = await Promise.all([
     getRecommended(),
     getAllFollowUsers(),
   ]);
@@ -16,7 +16,7 @@ const Sidebar = async () => {
     <Wrapper>
       <Toogle />
       <div className="space-y-4 pt-4 lg:pt-0">
-        <Following data={followedUser} />
+        <Following data={followedUsers} />
         <Recommended data={users} />
       </div>
     </Wrapper>

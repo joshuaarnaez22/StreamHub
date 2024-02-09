@@ -6,12 +6,17 @@ import { RecommendedItem } from "./recommended-item";
 
 interface FollowingProps {
   data: (Follow & {
-    following: User;
+    following: User & {
+      stream: {
+        isLive: boolean;
+      } | null;
+    };
   })[];
 }
 export const Following = ({ data }: FollowingProps) => {
   const { collapsed } = useSidebarStore();
   if (!data.length) return null;
+
   return (
     <div>
       {!collapsed && (
@@ -25,6 +30,7 @@ export const Following = ({ data }: FollowingProps) => {
             <RecommendedItem
               username={user.following.username}
               imageUrl={user.following.imageUrl!}
+              isLive={user.following.stream?.isLive}
             />
           </div>
         ))}
