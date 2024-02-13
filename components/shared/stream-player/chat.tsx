@@ -12,6 +12,7 @@ import { ConnectionState } from "livekit-client";
 import { ChatHeader } from "./chat-header";
 import { ChatForm } from "./chat-form";
 import { ChatList } from "./chat-list";
+import { ChatCommunity } from "./chat-community";
 
 interface ChatProps {
   isFollowing: boolean;
@@ -77,7 +78,11 @@ export const Chat = ({
       )}
       {type === ChatType.Community && (
         <>
-          <p>Community mode</p>
+          <ChatCommunity
+            isHidden={isHidden}
+            hostName={hostName}
+            viewerName={viewerName}
+          />
         </>
       )}
     </div>

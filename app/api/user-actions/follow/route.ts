@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
 
     if (id === self.user.id) {
       return NextResponse.json(
-        { message: "Cannot unfollow yourself" },
+        { message: "Cannot follow yourself" },
         { status: 200 }
       );
     }

@@ -1,4 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import { UserAvatarSkeleton } from "./userAvatar";
 
 export const RecommendedItemSkeleton = () => {
   return (
@@ -72,6 +73,67 @@ export const ChatSkeleton = () => {
       {[...Array(3)].map((_, i) => (
         <Skeleton className="h-16 w-full rounded-md" key={i} />
       ))}
+    </div>
+  );
+};
+
+export const VideoSkeleton = () => {
+  return (
+    <div className=" aspect-video border-x border-background">
+      <Skeleton className="h-full w-full rounded-none" />
+    </div>
+  );
+};
+
+export const HeaderSkeleton = () => {
+  return (
+    <div className="flex items-center justify-between p-3 border-b">
+      <Skeleton className="h-6 w-10 rounded-md" />
+      <Skeleton className="h-6 w-20 rounded-md" />
+      <Skeleton className="h-6 w-10 rounded-md" />
+    </div>
+  );
+};
+export const ChatFormSkeleton = () => {
+  return (
+    <div className="flex flex-col items-center gap-y-4 p-3">
+      <Skeleton className="w-full h-10" />
+      <div className="flex items-center gap-x-2 ml-auto">
+        <Skeleton className="h-7 w-12" />
+      </div>
+    </div>
+  );
+};
+
+export const StreamPlayerSkeleton = () => {
+  return (
+    <div className="grid grid-cols-1 lg:gap-y-0 lg:grid-cols-4 2xl:grid-cols-6 h-full">
+      <div className=" space-y-4 col-span-1 lg:col-span-3 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar">
+        <VideoSkeleton />
+        <VideoInfoSkeleton />
+      </div>
+      <div className="col-span-1 bg-background">
+        <div className="flex flex-col justify-between bg-background border-l border-b pt-0 h-[calc(100vh-80px)]">
+          <HeaderSkeleton />
+          <ChatFormSkeleton />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const VideoInfoSkeleton = () => {
+  return (
+    <div className="flex flex-col lg:flex-row gap-y-4 lg:gap-y-0 items-start justify-between p-4 ">
+      <div className="flex items-center gap-x-2">
+        <UserAvatarSkeleton size="lg" />
+        <div className="space-y-1">
+          <Skeleton className="h-6 w-32" />
+          <Skeleton className="h-4 w-24" />
+          <Skeleton className="h-4 w-14" />
+        </div>
+      </div>
+      <Skeleton className="h-10 w-32" />
     </div>
   );
 };

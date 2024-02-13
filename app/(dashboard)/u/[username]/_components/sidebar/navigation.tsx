@@ -4,7 +4,7 @@ import { useUser } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { Fullscreen, KeyRound, MessageSquare, Users } from "lucide-react";
 import { NavigationItem } from "./navigation-item";
-import { DashboardSkeleton } from "@/components/shared/sidebar-skeleton";
+import { DashboardSkeleton } from "@/components/shared/skeleton-loader";
 
 export const Navigation = () => {
   const pathName = usePathname();

@@ -8,6 +8,8 @@ import { useChatSidebarStore } from "@/store/use-chat-sidebar";
 import { cn } from "@/lib/utils";
 import { Chat } from "./chat";
 import { ChatToogle } from "./chat-toogle";
+import { StreamPlayerSkeleton } from "../skeleton-loader";
+import { VidoeInfo } from "./video-info";
 
 interface StreamPlayerProps {
   user: User & { stream: Stream | null };
@@ -18,7 +20,7 @@ export const StreamPlayer = ({ user, isFollowing }: StreamPlayerProps) => {
   const { collapsed } = useChatSidebarStore();
 
   if (!token || !name || !identity) {
-    return <div>Cannot watch stream</div>;
+    return <StreamPlayerSkeleton />;
   }
   return (
     <>
@@ -39,6 +41,14 @@ export const StreamPlayer = ({ user, isFollowing }: StreamPlayerProps) => {
       >
         <div className=" space-y-4 col-span-1 lg:col-span-3 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar">
           <Video hostName={user.username} hostIdentity={user.id} />
+          <VidoeInfo
+            hostName={user.username}
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            imageUrl={user.imageUrl!}
+            isFollowing={isFollowing}
+            name={user.stream?.name}
+          />
         </div>
         <div className={cn("col-span-1", collapsed && "hidden")}>
           <Chat
