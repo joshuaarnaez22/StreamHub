@@ -10,6 +10,7 @@ import { Chat } from "./chat";
 import { ChatToogle } from "./chat-toogle";
 import { StreamPlayerSkeleton } from "../skeleton-loader";
 import { VidoeInfo } from "./video-info";
+import { InfoCard } from "./info-card";
 
 interface StreamPlayerProps {
   user: User & { stream: Stream | null };
@@ -39,7 +40,7 @@ export const StreamPlayer = ({ user, isFollowing }: StreamPlayerProps) => {
           collapsed && "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2"
         )}
       >
-        <div className=" space-y-4 col-span-1 lg:col-span-3 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar">
+        <div className=" space-y-4 col-span-1 lg:col-span-3 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar mb-4">
           <Video hostName={user.username} hostIdentity={user.id} />
           <VidoeInfo
             hostName={user.username}
@@ -48,6 +49,12 @@ export const StreamPlayer = ({ user, isFollowing }: StreamPlayerProps) => {
             imageUrl={user.imageUrl!}
             isFollowing={isFollowing}
             name={user.stream?.name}
+          />
+          <InfoCard
+            name={user.stream?.name!}
+            thumbnailUrl={user.stream?.thumbnailUrl ?? null}
+            viewerIdentity={identity}
+            hostIdentity={user.id}
           />
         </div>
         <div className={cn("col-span-1", collapsed && "hidden")}>
