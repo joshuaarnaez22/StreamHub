@@ -18,14 +18,15 @@ import toast from "react-hot-toast";
 import { Hint } from "../hint";
 import { Trash } from "lucide-react";
 import Image from "next/image";
-interface InfoCardModal {
+
+interface InfoCardModalProps {
   initialName: string;
   initialThumbnailUrl: string | null;
 }
 export const InfoCardModal = ({
   initialName,
   initialThumbnailUrl,
-}: InfoCardModal) => {
+}: InfoCardModalProps) => {
   const [name, setName] = useState(initialName);
   const [isPending, setIsPending] = useState(false);
   const [thumbnailUrl, setThumbnailUrl] = useState(initialThumbnailUrl);
@@ -90,7 +91,7 @@ export const InfoCardModal = ({
               placeholder="Stream name"
               value={name}
               onChange={handleChange}
-              disabled={false}
+              disabled={isPending}
             />
           </div>
           <div className="space-y-2">

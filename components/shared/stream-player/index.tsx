@@ -11,9 +11,10 @@ import { ChatToogle } from "./chat-toogle";
 import { StreamPlayerSkeleton } from "../skeleton-loader";
 import { VidoeInfo } from "./video-info";
 import { InfoCard } from "./info-card";
+import { AboutCard } from "./about-card";
 
 interface StreamPlayerProps {
-  user: User & { stream: Stream | null };
+  user: User & { stream: Stream | null; _count: { followings: number } };
   isFollowing: boolean;
 }
 export const StreamPlayer = ({ user, isFollowing }: StreamPlayerProps) => {
@@ -55,6 +56,13 @@ export const StreamPlayer = ({ user, isFollowing }: StreamPlayerProps) => {
             thumbnailUrl={user.stream?.thumbnailUrl ?? null}
             viewerIdentity={identity}
             hostIdentity={user.id}
+          />
+          <AboutCard
+            hostName={user.username}
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            bio={user.bio}
+            followedCount={user._count?.followings}
           />
         </div>
         <div className={cn("col-span-1", collapsed && "hidden")}>

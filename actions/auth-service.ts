@@ -42,6 +42,11 @@ export const getSelfByUsername = async (username: string) => {
         username,
       },
       include: {
+        _count: {
+          select: {
+            followings: true,
+          },
+        },
         stream: true,
       },
     });
