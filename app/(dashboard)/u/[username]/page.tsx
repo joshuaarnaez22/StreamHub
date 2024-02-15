@@ -11,7 +11,7 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
   const user = await getSelfByUsername(params.username);
 
   if (user.error) {
-    return notFound();
+    notFound();
   }
   return (
     <div>

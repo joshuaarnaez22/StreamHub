@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -23,7 +23,7 @@ export const AboutCardModal = ({ initialBio }: AboutCardModalProps) => {
   const [isPending, setIsPending] = useState(false);
   const router = useRouter();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setBio(event.target.value || null);
   };
 
@@ -58,9 +58,9 @@ export const AboutCardModal = ({ initialBio }: AboutCardModalProps) => {
         <form className=" space-y-14" onSubmit={handleSubmit}>
           <div className="space-y-2">
             <Label htmlFor="bio">Bio</Label>
-            <Input
+            <Textarea
               id="bio"
-              placeholder="Bio"
+              placeholder="User bio"
               value={bio ?? ""}
               onChange={handleChange}
               disabled={isPending}
@@ -72,7 +72,6 @@ export const AboutCardModal = ({ initialBio }: AboutCardModalProps) => {
                 Cancel
               </Button>
             </DialogClose>
-
             <Button variant="primary" type="submit" disabled={isPending}>
               Save
             </Button>

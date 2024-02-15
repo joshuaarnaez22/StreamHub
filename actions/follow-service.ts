@@ -39,16 +39,30 @@ export const getAllFollowUsers = async () => {
     return [];
   }
 
+  const blockedIds = await prisma.block.findMany({
+    where: {
+      blockedId: self.user.id,
+    },
+    select: {
+      blockerId: true,
+    },
+  });
+
+  const excludedUserIds = [...blockedIds.map((blocked) => blocked.blockerId)];
   const folowedUsers = await prisma.follow.findMany({
     where: {
-      followerId: self.user.id,
-      following: {
-        blockedBy: {
-          none: {
-            blockerId: self.user.id,
+      AND: [
+        {
+          followerId: self.user.id,
+        },
+        {
+          following: {
+            id: {
+              notIn: excludedUserIds,
+            },
           },
         },
-      },
+      ],
     },
     include: {
       following: {

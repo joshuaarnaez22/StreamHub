@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { cn, truncateString } from "@/lib/utils";
 import { useSidebarStore } from "@/store/use-sidebar";
 import Link from "next/link";
 import { UserAvatar, UserAvatarSkeleton } from "@/components/shared/userAvatar";
@@ -52,7 +52,7 @@ export const RecommendedItem = ({
               imageUrl={imageUrl}
               username={username}
             />
-            {!collapsed && <div className=" truncate">{username}</div>}
+            {!collapsed && <div>{truncateString(username, 10)}</div>}
             {!collapsed && isLive && <LiveBadge />}
           </div>
         </div>

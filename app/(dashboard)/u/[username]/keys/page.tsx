@@ -10,7 +10,7 @@ export default async function KeysPage() {
   const stream = await getStreamUser();
 
   if (!stream) {
-    return notFound();
+    notFound();
   }
   return (
     <div className="p-6">

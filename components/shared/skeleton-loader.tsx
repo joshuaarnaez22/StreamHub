@@ -1,5 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { UserAvatarSkeleton } from "./userAvatar";
+import { UserAvatar, UserAvatarSkeleton } from "./userAvatar";
 
 export const RecommendedItemSkeleton = () => {
   return (
@@ -134,6 +134,32 @@ export const VideoInfoSkeleton = () => {
         </div>
       </div>
       <Skeleton className="h-10 w-32" />
+    </div>
+  );
+};
+
+export const ResultSkeleton = () => {
+  return (
+    <div className="h-full p-8 max-w-screen-2xl mx-auto">
+      <Skeleton className="h-12 w-[290px] mb-4" />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+        {[...Array(10)].map((_, index) => (
+          <div
+            className="group aspect-video relative cursor-pointer rounded-md"
+            key={index}
+          >
+            <Skeleton className="h-full w-full" />
+            <div className="flex gap-x-3 mt-4">
+              <Skeleton className=" min-w-8 min-h-8 rounded-full" />
+              <div className="flex flex-col gap-y-2 ">
+                <Skeleton className="h-4 w-32" />
+                <Skeleton className="h-3 w-24" />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -17,3 +17,12 @@ export const generateHexColorFromString = (str?: string) => {
     "#" + (numericalValue % 0xffffff).toString(16).padStart(6, "0");
   return hexColor;
 };
+
+export const truncateString = (value: string, maxLen?: number) => {
+  const maxCount = maxLen || 5;
+  if (value.length > maxCount) {
+    return value.substring(0, maxCount) + "...";
+  } else {
+    return value;
+  }
+};

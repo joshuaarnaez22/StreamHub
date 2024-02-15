@@ -63,7 +63,7 @@ export const ChatForm = ({
           disabled={isDisabled}
           placeholder="Send a message"
           className={cn(
-            "border-white/10",
+            "border-white/10 ",
             isFollowing && "rounded-t-none border-t-0"
           )}
         />

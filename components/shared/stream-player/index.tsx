@@ -13,10 +13,30 @@ import { VidoeInfo } from "./video-info";
 import { InfoCard } from "./info-card";
 import { AboutCard } from "./about-card";
 
+type CustomStream = {
+  id: string;
+  isChatEnabled: boolean;
+  isChatDelayed: boolean;
+  isChatFollowersOnly: boolean;
+  isLive: boolean;
+  thumbnailUrl: string | null;
+  name: string;
+};
+
+type CustomUser = {
+  id: string;
+  username: string;
+  bio: string | null;
+  stream: CustomStream | null;
+  imageUrl: string | null;
+  _count: { followings: number };
+};
+
 interface StreamPlayerProps {
-  user: User & { stream: Stream | null; _count: { followings: number } };
+  user: CustomUser;
   isFollowing: boolean;
 }
+
 export const StreamPlayer = ({ user, isFollowing }: StreamPlayerProps) => {
   const { token, name, identity } = useViewerToken(user.id);
   const { collapsed } = useChatSidebarStore();

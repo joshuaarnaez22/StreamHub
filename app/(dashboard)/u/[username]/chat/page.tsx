@@ -7,7 +7,7 @@ export default async function ChatPage() {
   const stream = await getStreamUser();
 
   if (!stream) {
-    return notFound();
+    notFound();
   }
 
   return (

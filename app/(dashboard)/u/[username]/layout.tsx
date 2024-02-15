@@ -12,7 +12,7 @@ const CreatorLayout = async ({ children, params }: CreatorLayoutProps) => {
   const self = await getSelfByUsername(params.username);
 
   if (self.error) {
-    return notFound();
+    notFound();
   }
 
   return (

@@ -5,11 +5,16 @@ import { getSelf } from "../auth-service";
 import { isBlockedByUser } from "../block-service";
 import { getUserById } from "../user-service";
 import { v4 } from "uuid";
+
 export const createViewerToken = async (hostIdentity: string) => {
   let self;
 
   try {
-    self = await getSelf();
+    const selfUser = await getSelf();
+    if (!selfUser.user) {
+      throw new Error("Not login proceed");
+    }
+    self = selfUser;
   } catch (error) {
     const id = v4();
     const username = `guest#${Math.floor(Math.random() * 1000)}`;

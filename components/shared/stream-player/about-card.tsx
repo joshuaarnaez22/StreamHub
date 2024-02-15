@@ -1,4 +1,4 @@
-import { AboutCardModal } from "./about-card-moda";
+import { AboutCardModal } from "./about-card-modal";
 import { VerifiedMark } from "./verified-mark";
 
 interface AbouCardProps {
