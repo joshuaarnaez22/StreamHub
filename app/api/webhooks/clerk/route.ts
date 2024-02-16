@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 
 import prisma from "@/lib/prisma";
+import { resetIngresses } from "@/actions/server-actions/ingress";
 
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
@@ -79,6 +80,7 @@ export async function POST(req: Request) {
     });
   }
   if (eventType === "user.deleted") {
+    await resetIngresses(payload.data.id);
     await prisma.user.delete({
       where: {
         externalUserId: payload.data.id,
