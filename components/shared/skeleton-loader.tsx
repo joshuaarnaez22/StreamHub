@@ -163,3 +163,23 @@ export const ResultSkeleton = () => {
     </div>
   );
 };
+export const SearchResultSkeleton = () => {
+  return (
+    <div>
+      <Skeleton className="h-10 w-[290px] mb-4" />
+
+      <div className="flex flex-col gap-y-4">
+        {[...Array(6)].map((_, index) => (
+          <div className="w-full flex gap-x-4" key={index}>
+            <Skeleton className=" h-[9rem] w-[16rem]" />
+            <div className=" space-y-2">
+              <Skeleton className=" h-6 w-[10rem]" />
+              <Skeleton className=" h-6 w-[8rem]" />
+              <Skeleton className=" h-6 w-[7rem]" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};

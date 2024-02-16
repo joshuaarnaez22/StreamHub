@@ -14,7 +14,7 @@ export const Search = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!search) return;
+    if (!search) return router.push("/");
     const url = qs.stringifyUrl(
       {
         url: "/search",

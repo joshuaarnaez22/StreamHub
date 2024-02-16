@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { getSelf } from "./auth-service";
 
-export const getStreams = async () => {
+export const getSearchStreams = async (term: string) => {
   let self;
   let streams = [];
 
@@ -36,6 +36,20 @@ export const getStreams = async () => {
     ];
     streams = await prisma.stream.findMany({
       where: {
+        OR: [
+          {
+            name: {
+              contains: term,
+            },
+          },
+          {
+            user: {
+              username: {
+                contains: term,
+              },
+            },
+          },
+        ],
         user: {
           id: {
             notIn: excludedUserIds,
@@ -48,21 +62,38 @@ export const getStreams = async () => {
         thumbnailUrl: true,
         name: true,
         user: true,
+        updatedAt: true,
       },
       orderBy: [{ isLive: "desc" }, { updatedAt: "desc" }],
     });
   } else {
     streams = await prisma.stream.findMany({
+      where: {
+        OR: [
+          {
+            name: {
+              contains: term,
+            },
+          },
+          {
+            user: {
+              username: {
+                contains: term,
+              },
+            },
+          },
+        ],
+      },
       select: {
         id: true,
         isLive: true,
         thumbnailUrl: true,
         name: true,
         user: true,
+        updatedAt: true,
       },
       orderBy: [{ isLive: "desc" }, { updatedAt: "desc" }],
     });
   }
-
   return streams;
 };
