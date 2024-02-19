@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import React from "react";
 import { ToogleCard } from "./_components/toogle-card";
 
+export const dynamic = "force-dynamic";
+
 export default async function ChatPage() {
   const stream = await getStreamUser();
 

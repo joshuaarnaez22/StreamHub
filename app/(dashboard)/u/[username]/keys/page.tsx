@@ -6,6 +6,8 @@ import { getStreamUser } from "@/actions/stream-service";
 import { KeyCard } from "./_components/key-card";
 import { ConnectModal } from "./_components/connect-modal";
 
+export const dynamic = "force-dynamic";
+
 export default async function KeysPage() {
   const stream = await getStreamUser();
 

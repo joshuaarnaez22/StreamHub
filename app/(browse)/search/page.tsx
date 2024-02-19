@@ -8,7 +8,7 @@ interface SearchPageProps {
     term?: string;
   };
 }
-
+export const dynamic = "force-dynamic";
 export default async function SearchPage({ searchParams }: SearchPageProps) {
   if (!searchParams.term) {
     return redirect("/");

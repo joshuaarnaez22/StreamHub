@@ -5,6 +5,8 @@ import { allBlockUsers } from "@/actions/block-service";
 import { format } from "date-fns";
 DataTable;
 
+export const dynamic = "force-dynamic";
+
 export default async function CommunityPage() {
   const data = await allBlockUsers();
 

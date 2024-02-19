@@ -10,6 +10,7 @@ interface UserPageProps {
     username: string;
   };
 }
+export const dynamic = "force-dynamic";
 export default async function UserPage({ params }: UserPageProps) {
   const user = await getUserByUsername(params.username);
 

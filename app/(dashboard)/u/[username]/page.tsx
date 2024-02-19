@@ -7,6 +7,7 @@ interface CreatorPageProps {
     username: string;
   };
 }
+export const dynamic = "force-dynamic";
 export default async function CreatorPage({ params }: CreatorPageProps) {
   const user = await getSelfByUsername(params.username);
 
